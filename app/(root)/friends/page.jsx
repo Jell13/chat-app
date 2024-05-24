@@ -1,9 +1,10 @@
+import ItemList from '@components/item-list/ItemList'
 import React from 'react'
 
 const FriendsPage = () => {
   return (
     <div>
-      Friend Page
+      <ItemList title="Friends">Friends Page</ItemList>
     </div>
   )
 }

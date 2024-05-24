@@ -11,9 +11,9 @@ const MobileNav = () => {
 
     const paths = useNavigation()
   return (
-    <Card className="hidden lg:flex lg:flex-col lg:justify-between lg:items-center lg:h-full lg:w-16 lg:px-2 lg:py-4">
-        <nav>
-          <ul className="flex flex-col items-center gap-4">
+    <Card className="fixed bottom-4 lg:hidden w-[calc(100vw-32px)] flex items-center h-16 p-2">
+        <nav className="w-full">
+          <ul className="flex flex-row items-center justify-evenly">
             {paths?.map((path,id) => (
               <li key={id} className="relative">
                 <Link href={path.href}>
@@ -30,11 +30,12 @@ const MobileNav = () => {
                 </Link>
               </li>
             ))}
+            <li>
+                <UserButton/>
+            </li>
           </ul>
         </nav>
-        <div className="flex flex-col items-center gap-4">
-          <UserButton/>
-        </div>
+        
     </Card>
   )
 }
