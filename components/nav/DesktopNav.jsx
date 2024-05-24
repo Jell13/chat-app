@@ -1,6 +1,7 @@
 "use client"
 
 import { UserButton } from "@clerk/nextjs"
+import { ModeToggle } from "@components/ThemeToggle"
 import { Button } from "@components/ui/button"
 import { Card } from "@components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@components/ui/tooltip"
@@ -34,6 +35,7 @@ const DesktopNav = () => {
         </nav>
         <div className="flex flex-col items-center gap-4">
           <UserButton/>
+          <ModeToggle/>
         </div>
     </Card>
   )

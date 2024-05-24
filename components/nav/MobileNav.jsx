@@ -1,6 +1,7 @@
 "use client"
 
 import { UserButton } from "@clerk/nextjs"
+import { ModeToggle } from "@components/ThemeToggle"
 import { Button } from "@components/ui/button"
 import { Card } from "@components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@components/ui/tooltip"
@@ -36,11 +37,13 @@ const MobileNav = () => {
               </li>
             ))}
             <li>
+                <ModeToggle/>
+            </li>
+            <li>
                 <UserButton/>
             </li>
           </ul>
-        </nav>
-        
+        </nav> 
     </Card>
   )
 }

@@ -10,7 +10,7 @@ import ConversationFallback from '@components/conversation/ConversationFallback'
 
 const ConversationsPage = () => {
 
-    const store = useMutation(api.users.store)
+    const store = useMutation(api.user.store)
     const {isAuthenticated} = useConvexAuth()
 
     useEffect(() => {

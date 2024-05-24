@@ -5,7 +5,6 @@ export const store = mutation({
     args:{},
     handler: async (ctx) => {
         const identity = await ctx.auth.getUserIdentity()
-        console.log(identity)
 
         if(!identity){
             throw new ConvexError("Called storeUser before authenticated")
