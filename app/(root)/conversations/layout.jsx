@@ -1,11 +1,15 @@
 
+import ItemList from '@components/item-list/ItemList'
 import React from 'react'
 
 const ConversationsLayout = ({children}) => {
   return (
-    <div>
-        {children}
-    </div>
+    <>
+      <ItemList title="Conversations">
+        Conversation Page
+      </ItemList>
+      {children}
+    </>
   )
 }
 

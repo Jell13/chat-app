@@ -1,11 +1,12 @@
 
+import ConversationContainer from '@components/conversation/ConversationContainer'
 import React from 'react'
 
 const ConversationPage = () => {
   return (
-    <div>
+    <ConversationContainer>
       Conversation Page
-    </div>
+    </ConversationContainer>
   )
 }
 
