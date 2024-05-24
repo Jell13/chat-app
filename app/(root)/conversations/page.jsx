@@ -7,7 +7,7 @@ import { useConvexAuth, useMutation } from "convex/react";
 import { useEffect } from "react";
 import { SignOutButton, UserButton } from '@clerk/nextjs';
 
-const converPage = () => {
+const ConversationsPage = () => {
 
     const store = useMutation(api.users.store)
     const {isAuthenticated} = useConvexAuth()
@@ -18,11 +18,10 @@ const converPage = () => {
         }
     })
   return (
-    <div className='w-screen h-screen flex justify-center items-center'>
-      Main Shit
-      <UserButton/>
+    <div>
+      Conversations page
     </div>
   )
 }
 
-export default converPage
+export default ConversationsPage
