@@ -1,6 +1,5 @@
 import { ConvexError, v } from "convex/values";
 import { mutation } from "./_generated/server";
-import { getUserByToken } from "./_utils";
 
 export const create = mutation({
     args: {
