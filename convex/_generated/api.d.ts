@@ -16,7 +16,7 @@ import type {
 } from "convex/server";
 import type * as request from "../request.js";
 import type * as user from "../user.js";
-import type * as _util from "../_util.js";
+import type * as _utils from "../_utils.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -29,7 +29,7 @@ import type * as _util from "../_util.js";
 declare const fullApi: ApiFromModules<{
   request: typeof request;
   user: typeof user;
-  _util: typeof _util;
+  _utils: typeof _utils;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
