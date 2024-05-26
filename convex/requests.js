@@ -11,7 +11,6 @@ export const get = query({
         }
 
         const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
-        console.log(currentUser)
         if(!currentUser){
             throw new ConvexError("Unauthorized user")
         }
@@ -20,7 +19,6 @@ export const get = query({
 
         const requestWithSender = await Promise.all(requests.map(async (request) => {
             const sender = await ctx.db.get(request.sender)
-
             if(!sender){
                 throw new ConvexError("Request sender could not be found")
             }
@@ -30,5 +28,25 @@ export const get = query({
 
         return requestWithSender
 
+    }
+})
+
+export const count = query({
+    args:{},
+    handler: async (ctx) => {
+
+        const identity = await ctx.auth.getUserIdentity()
+        if(!identity){
+            throw new ConvexError("Error user not authenticated")
+        }
+
+        const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
+        if(!currentUser){
+            throw new ConvexError("Error")
+        }
+
+        const requests = await ctx.db.query("requests").withIndex("by_receiver", q => q.eq("receiver", currentUser._id)).collect()
+
+        return requests.length
     }
 })
