@@ -43,3 +43,28 @@ export const create = mutation({
         return request
     }
 })
+
+export const deny = mutation({
+    args:{
+        id: v.id("requests")
+    },
+    handler: async (ctx, args) => {
+
+        const identity = await ctx.auth.getUserIdentity()
+        if(!identity){
+            throw new ConvexError("Unauthorized")
+        }
+
+        const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
+        if(!currentUser){
+            throw new ConvexError("User not found")
+        }
+
+        const request = await ctx.db.get(args.id)
+        if(!request || request.receiver !== currentUser._id){
+            throw new ConvexError("User is not authorized to deny")
+        }
+
+        await ctx.db.delete(request._id)
+    }
+})
