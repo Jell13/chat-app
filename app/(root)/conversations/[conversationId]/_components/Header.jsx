@@ -7,7 +7,7 @@ const Header = ({imageUrl, name}) => {
   return (
     <Card className='w-full flex rounded-lg items-center p-2 justify-between'>
         <div className='flex items-center gap-2'>
-            <Link className='block lg:hidden'>
+            <Link href="/conversations" className='block lg:hidden'>
                 <CircleArrowLeft/>
             </Link>
         </div>

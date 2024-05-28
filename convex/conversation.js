@@ -5,7 +5,7 @@ export const get = query({
     args:{
         id: v.id("conversations")
     },
-    handler: async (ctx) => {
+    handler: async (ctx, args) => {
 
         const identity = await ctx.auth.getUserIdentity()
         if(!identity){
@@ -18,7 +18,7 @@ export const get = query({
         }
 
         const conversation = await ctx.db.get(args.id)
-        if(!conversations){
+        if(!conversation){
             throw new ConvexError("Conversation not found")
         }
 
