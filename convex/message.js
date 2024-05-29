@@ -5,7 +5,7 @@ export const create = mutation({
     args:{
         conversationId: v.id("conversations"),
         type: v.string(),
-        convent: v.array(v.string())
+        content: v.array(v.string())
     },
     handler: async (ctx, args) => {
 
@@ -14,7 +14,7 @@ export const create = mutation({
             throw new ConvexError("Unauthorized")
         }
 
-        const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier))
+        const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
         if(!currentUser){
             throw new ConvexError("User not found")
         }

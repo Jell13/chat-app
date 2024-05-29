@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from '@components/ui/button'
 import { Card } from '@components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@components/ui/form'
 import { api } from '@convex/_generated/api'
@@ -7,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useConversation } from '@hooks/useConversation'
 import { useMutationState } from '@hooks/useMutationState'
 import { ConvexError } from 'convex/values'
+import { SendHorizonal } from 'lucide-react'
 import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -31,7 +33,7 @@ const ChatInput = () => {
     }
   })
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values) => {
     await createMessage({conversationId, type:"text", content: [values.content] }).then(() => {
       form.reset()
     }).catch((error) => {
@@ -54,14 +56,13 @@ const ChatInput = () => {
             <FormField control={form.control} name="content" render={({field}) => {
               return <FormItem className="h-full w-full">
                 <FormControl>
-                  <TextareaAutosize onKeyDown={async e => {if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); await form.handleSubmit(handleSubmit)}}} rows={1} maxRows={3} {...field} onChange={handleInputChange} onClick={handleInputChange} placeholder='Type a message...' 
+                  <TextareaAutosize onKeyDown={async e => {if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); await form.handleSubmit(handleSubmit)()}}} rows={1} maxRows={3} {...field} onChange={handleInputChange} onClick={handleInputChange} placeholder='Type a message...' 
                   className='min-h-full w-full resize-none border-0 outline-0 bg-card text-card-foreground placeholder:text-muted-foreground p-1.5'/>
                 </FormControl>
                 <FormMessage/>
               </FormItem>
-            }}>
-
-            </FormField>
+            }}/>
+            <Button disable={pending} size="icon" type="submit"><SendHorizonal/></Button>
           </form>
         </Form>
       </div>
