@@ -52,4 +52,15 @@
       --ring: 224.3 76.3% 48%;
     }
   }
+
+  @layer utilities{
+    .no-scrollbar::-webkit-scrollbar{
+      display: none;
+    }
+
+    .no-scrollbar{
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
   

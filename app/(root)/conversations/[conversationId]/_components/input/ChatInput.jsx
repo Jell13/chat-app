@@ -1,10 +1,11 @@
+import { Card } from '@components/ui/card'
 import React from 'react'
 
 const ChatInput = () => {
   return (
-    <div>
+    <Card className="w-full p-2 rounded-lg relative">
       Chat Input
-    </div>
+    </Card>
   )
 }
 
