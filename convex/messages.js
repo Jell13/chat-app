@@ -23,7 +23,6 @@ export const get = query({
         }
 
         const messages = await ctx.db.query("messages").withIndex("by_conversationId", q => q.eq("conversationId", args.id)).order("desc").collect()
-
         const messagesWithUsers = Promise.all(messages.map( async message => {
             const messageSender = await ctx.db.get(message.senderId)
             if(!messageSender){
