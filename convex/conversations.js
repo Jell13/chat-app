@@ -28,17 +28,47 @@ export const get = query({
 
         const conversationsWithDetails = await Promise.all(conversations.map(async (conversation, index) => {
             const allconversationMemberships = await ctx.db.query("conversationMembers").withIndex("by_conversationId", q => q.eq("conversationId", conversation?._id)).collect()
+            
+            const lastMessage = await getLastMessageDetails({ctx, id: conversation.lastMessageId})
             if(conversation.isGroup){
-                return {conversation}
+                return {conversation, lastMessage}
             }
             else{
                 const otherMembership = allconversationMemberships.filter(membership => membership.memberId !== currentUser._id)[0]
                 const otherMember = await ctx.db.get(otherMembership.memberId)
 
-                return {conversation, otherMember}
+                return {conversation, otherMember, lastMessage}
             }
         }))
 
         return conversationsWithDetails
     }
 })
+
+const getLastMessageDetails = async({ctx, id}) => {
+    if(!id) return null 
+
+    const message = await ctx.db.get(id)
+    if(!message){
+        return null
+    }
+
+    const sender = await ctx.db.get(message.senderId)
+    if(!sender){
+        return null
+    }
+
+    const content = getMessageContent(message.type, message.content)
+    return {
+        content, sender: sender.username
+    }
+}
+
+const getMessageContent = (type, content) => {
+    switch(type){
+        case "text":
+            return content
+        default:
+            return "[Non-text]"
+    }
+}
