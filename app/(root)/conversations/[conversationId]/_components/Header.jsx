@@ -27,7 +27,7 @@ const Header = ({imageUrl, name, options}) => {
                 <Settings/></Button></DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {options.map((option, id) => {
-                    return <DropdownMenuItem key={id} onClick={option.onCLick}
+                    return <DropdownMenuItem key={id} onClick={option.onClick}
                     className={cn("font-semibold",{
                       "text-destructive" : option.destructive
                     })}>{option.label}</DropdownMenuItem>

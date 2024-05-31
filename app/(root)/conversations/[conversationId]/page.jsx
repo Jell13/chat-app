@@ -9,6 +9,7 @@ import React, { useState } from 'react'
 import Header from './_components/Header'
 import Body from './_components/body/Body'
 import ChatInput from './_components/input/ChatInput'
+import RemoveFriendDialog from './_components/dialogs/RemoveFriendDialog'
 
 const ConversationPage = ({params: {conversationId}}) => {
   
@@ -20,7 +21,9 @@ const ConversationPage = ({params: {conversationId}}) => {
 
   return (
     conversation === undefined ? <div className='w-full h-full flex items-center justify-center'><Loader2 className='h-8 w-8'/></div> : 
-    conversation === null ? <p className='w-full h-full flex items-center justify-center'>Conversation not found</p> : <ConversationContainer>
+    conversation === null ? <p className='w-full h-full flex items-center justify-center'>Conversation not found</p> : 
+    <ConversationContainer>
+      <RemoveFriendDialog conversationId={conversationId} open={removeFriendDialogOpen} setOpen={setRemoveFriendDialogOpen}/>
       <Header name={conversation.isGroup ? conversation.name : conversation.otherMember.username || ""} imageUrl={conversation.isGroup ? undefined : conversation.otherMember.imageUrl}
       options={conversation.isGroup ? [
         {label: "Leave group",
