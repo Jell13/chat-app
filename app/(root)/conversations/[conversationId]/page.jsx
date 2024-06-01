@@ -10,6 +10,8 @@ import Header from './_components/Header'
 import Body from './_components/body/Body'
 import ChatInput from './_components/input/ChatInput'
 import RemoveFriendDialog from './_components/dialogs/RemoveFriendDialog'
+import DeleteGroupDialog from './_components/dialogs/DeleteGroupDialog'
+import LeaveGroupDialog from './_components/dialogs/LeaveGroupDialog'
 
 const ConversationPage = ({params: {conversationId}}) => {
   
@@ -24,7 +26,9 @@ const ConversationPage = ({params: {conversationId}}) => {
     conversation === null ? <p className='w-full h-full flex items-center justify-center'>Conversation not found</p> : 
     <ConversationContainer>
       <RemoveFriendDialog conversationId={conversationId} open={removeFriendDialogOpen} setOpen={setRemoveFriendDialogOpen}/>
-      <Header name={conversation.isGroup ? conversation.name : conversation.otherMember.username || ""} imageUrl={conversation.isGroup ? undefined : conversation.otherMember.imageUrl}
+      <LeaveGroupDialog conversationId={conversationId} open={leaveGroupDialogOpen} setOpen={setLeaveGroupDialogOpen}/>
+      <DeleteGroupDialog conversationId={conversationId} open={deleteGroupDialogOpen} setOpen={setDeleteGroupDialogOpen}/>
+      <Header name={conversation.isGroup ? conversation.name : conversation.otherMember?.username || ""} imageUrl={conversation.isGroup ? undefined : conversation.otherMember?.imageUrl}
       options={conversation.isGroup ? [
         {label: "Leave group",
           destructive: false,
