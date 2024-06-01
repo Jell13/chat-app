@@ -1,5 +1,5 @@
 import { ConvexError, v } from "convex/values";
-import { query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 export const get = query({
     args:{
@@ -51,7 +51,7 @@ export const get = query({
         else{
             const otherMembers = (await Promise.all(allConversationMemberships.filter(membership => membership.memberId !== currentUser._id))).map( async membership => {
                 const member = await ctx.db.get(membership.memberId)
-                if(member){
+                if(!member){
                     throw new ConvexError("Member could not be found")
                 }
 
