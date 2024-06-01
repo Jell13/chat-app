@@ -82,7 +82,7 @@ const CreateGroupDialog = () => {
                     <FormField control={form.control} name="members"
                     render={() => {
                         return <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>Friends</FormLabel>
                             <FormControl><DropdownMenu></DropdownMenu></FormControl>
                         </FormItem>
                     }}/>
