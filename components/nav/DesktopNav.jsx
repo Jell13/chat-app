@@ -12,13 +12,7 @@ import Link from "next/link"
 
 const DesktopNav = () => {
 
-    const {isAuthenticated} = useConvexAuth()
-
-
-    if(isAuthenticated){
-      const paths = useNavigation()
-    }
-    
+    const paths = useNavigation()
   return (
     <Card className="hidden lg:flex lg:flex-col lg:justify-between lg:items-center lg:h-full lg:w-16 lg:px-2 lg:py-4">
         <nav>

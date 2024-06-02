@@ -6,8 +6,8 @@ import { useMemo } from "react"
 
 export const useNavigation = () => {
     const pathname = usePathname()
-    const requestCount = useQuery(api.requests.count)
     const conversations = useQuery(api.conversations.get)
+    const requestCount = useQuery(api.requests.count)
 
     const unseenMessagesCount = useMemo(() => {
         return conversations?.reduce((acc,curr) => {
