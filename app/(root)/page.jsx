@@ -1,5 +1,6 @@
 "use client"
 
+import { Card } from "@components/ui/card"
 import { api } from "@convex/_generated/api"
 import { useConvexAuth, useMutation } from "convex/react"
 import Link from "next/link"
