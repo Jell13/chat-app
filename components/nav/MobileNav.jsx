@@ -12,7 +12,13 @@ import Link from "next/link"
 
 const MobileNav = () => {
 
-    const paths = useNavigation()
+    
+    const {isAuthenticated} = useConvexAuth()
+
+
+    if(isAuthenticated){
+      const paths = useNavigation()
+    }
     const {isActive} = useConversation()
 
     if(isActive) return null;
