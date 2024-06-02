@@ -166,3 +166,35 @@ export const leaveGroup = mutation({
         await ctx.db.delete(membership._id)
     }
 })
+
+export const markRead = mutation({
+    args:{
+        conversationId: v.id("conversations"),
+        messageId: v.id("messages")
+    },
+    handler: async (ctx, args) => {
+
+        const identity = await ctx.auth.getUserIdentity()
+        if(!identity){
+            throw new ConvexError("Unauthorized")
+        }
+
+        const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
+        if(!currentUser){
+            throw new ConvexError("User not found")
+        }
+
+        const membership = await ctx.db.query("conversationMembers").withIndex("by_memberId_conversationId", q => q.eq("memberId", currentUser._id).eq("conversationId", args.conversationId)).unique()
+        if (!membership) {
+            // Graceful error handling if the user is not a member
+            console.log(`User ${currentUser._id} is not a member of conversation ${args.conversationId}`);
+            return;
+        }
+
+        const lastMessage = await ctx.db.get(args.messageId)
+
+        await ctx.db.patch(membership._id, {
+            lastSeenMessage: lastMessage ? lastMessage._id : undefined
+        })
+    }
+})

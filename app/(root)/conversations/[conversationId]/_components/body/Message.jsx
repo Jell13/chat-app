@@ -4,7 +4,7 @@ import { cn } from '@lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar'
 
 
-const Message = ({fromCurrentUser, senderImage, senderName, lastByUser, content, createdAt, type}) => {
+const Message = ({fromCurrentUser, senderImage, senderName, lastByUser, content, createdAt, seen, type}) => {
 
     const formatTime = (timestamp) => {
         return format(timestamp, "HH:mm")
@@ -30,6 +30,7 @@ const Message = ({fromCurrentUser, senderImage, senderName, lastByUser, content,
                 "text-secondary-foreground justify-start": !fromCurrentUser
             })}>{formatTime(createdAt)}</p>
         </div>
+        {seen}
       </div>
       <Avatar className={cn("relative w-8 h-8",{
         "order-2":fromCurrentUser,

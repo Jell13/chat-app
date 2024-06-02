@@ -45,7 +45,7 @@ const ConversationPage = ({params: {conversationId}}) => {
           onClick: () => setRemoveFriendDialogOpen(true)
         }
       ]}/>
-      <Body/>
+      <Body members={conversation.isGroup ? conversation.otherMembers ? conversation.otherMembers : [] : conversation.otherMember ? [conversation.otherMember] : []}/>
       <ChatInput/>
     </ConversationContainer>
   )

@@ -1,13 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar'
+import { Badge } from '@components/ui/badge'
 import { Card } from '@components/ui/card'
 import { User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const GroupConversationItem = ({id, name, lastMessageSender, lastMessageContent}) => {
+const GroupConversationItem = ({id, name, lastMessageSender, lastMessageContent, unseenCount}) => {
   return (
     <Link href={`/conversations/${id}`} className='w-full'>
-        <Card className='p-2 flex flex-row items-center gap-4 truncate'>
+        <Card className='p-2 flex flex-row items-center justify-between'>
             <div className='flex flex-row items-center gap-4 truncate'>
                 <Avatar>
                     <AvatarFallback>
@@ -22,6 +23,7 @@ const GroupConversationItem = ({id, name, lastMessageSender, lastMessageContent}
                     </span>:<p className='text-sm text-muted-foreground truncate'>Start the conversation!</p>}
                 </div>
             </div>
+            {unseenCount ? <Badge>{unseenCount}</Badge>: null}
         </Card>
     </Link>
   )
