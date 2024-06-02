@@ -3,6 +3,7 @@
 import { api } from "@convex/_generated/api"
 import { useConvexAuth, useMutation } from "convex/react"
 import Link from "next/link"
+import { useEffect } from "react"
 
 export default function Home() {
 
