@@ -42,7 +42,7 @@ export const count = query({
 
         const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
         if(!currentUser){
-            throw new ConvexError("User not found")
+            console.log("User not found")
         }
 
         const requests = await ctx.db.query("requests").withIndex("by_receiver", q => q.eq("receiver", currentUser._id)).collect()
