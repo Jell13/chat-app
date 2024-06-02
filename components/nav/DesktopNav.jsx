@@ -7,11 +7,18 @@ import { Button } from "@components/ui/button"
 import { Card } from "@components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@components/ui/tooltip"
 import { useNavigation } from "@hooks/useNavigation"
+import { useConvexAuth } from "convex/react"
 import Link from "next/link"
 
 const DesktopNav = () => {
 
-    const paths = useNavigation()
+    const {isAuthenticated} = useConvexAuth()
+
+
+    if(isAuthenticated){
+      const paths = useNavigation()
+    }
+    
   return (
     <Card className="hidden lg:flex lg:flex-col lg:justify-between lg:items-center lg:h-full lg:w-16 lg:px-2 lg:py-4">
         <nav>

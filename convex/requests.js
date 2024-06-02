@@ -37,12 +37,12 @@ export const count = query({
 
         const identity = await ctx.auth.getUserIdentity()
         if(!identity){
-            throw new ConvexError("Error user not authorized")
+            throw new ConvexError("Unauthorized")
         }
 
         const currentUser = await ctx.db.query("users").withIndex("by_tokenIdentifier", q => q.eq("tokenIdentifier", identity.tokenIdentifier)).unique()
         if(!currentUser){
-            console.log("User not found")
+            throw new ConvexError("User not found")
         }
 
         const requests = await ctx.db.query("requests").withIndex("by_receiver", q => q.eq("receiver", currentUser._id)).collect()
