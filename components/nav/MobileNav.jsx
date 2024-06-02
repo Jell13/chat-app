@@ -8,6 +8,7 @@ import { Card } from "@components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@components/ui/tooltip"
 import { useConversation } from "@hooks/useConversation"
 import { useNavigation } from "@hooks/useNavigation"
+import { useConvexAuth } from "convex/react"
 import Link from "next/link"
 
 const MobileNav = () => {
